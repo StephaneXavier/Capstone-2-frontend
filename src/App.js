@@ -9,6 +9,9 @@ import Register from './Register';
 import useLocalStorage from './UseLocalStorage';
 import Logout from './Logout';
 import SubmitWashroom from './SubmittWashroom';
+import Profile from './Profile';
+
+
 
 let UserInfoContext = createContext();
 
@@ -16,7 +19,8 @@ function App() {
 
     const [cityWashrooms, setCityWashrooms] = useState();
     const [userInfo, setUserInfo, clearUserInfo] = useLocalStorage();
-    console.log(userInfo)
+    
+
     useEffect(() => {
         async function getAllWashrooms() {
             const resultCityWashrooms = await WashroomApi.getAllCityApi()
@@ -53,16 +57,38 @@ function App() {
         submitWahsroom()
     }
 
+    // function findClosestWashroom(userLocation){
+    //     const {longitude, latitude} = userLocation.coords
+    //     // console.log('longitude', longitude)
+    //     // console.log('latitude', latitude)
+        
+    //     let shortestBathroomId = {distance: Infinity};
+    //     for(let washroom of cityWashrooms){
+    //         let currentDistance = getDistance({latitude, longitude}, {latitude:washroom.geometry.y,longitude:washroom.geometry.x})
+    //         if(currentDistance < shortestBathroomId.distance){
+    //             shortestBathroomId = {...washroom, currentDistance}
+    //         }
+    //     }
+
+
+
+    //     console.log(shortestBathroomId)
+
+
+       
+    // }
+
 
     return (
         <BrowserRouter>
             <UserInfoContext.Provider value={userInfo} >
                 <NavBar userInfo={userInfo} />
                 <Routes>
-                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/" element={<Home cityWashrooms={cityWashrooms} />}></Route>
                     <Route path="/login" element={<Login loginUser={loginUser} ></Login>} ></Route>
                     <Route path="/register" element={<Register registerUser={registerUser}></Register>}></Route>
                     <Route path="/logout" element={<Logout logout={clearUserInfo}></Logout>}></Route>
+                    <Route path="/profile" element={<Profile></Profile>}></Route>
                     <Route path="/submit-washroom" element={<SubmitWashroom submitNewWashroom={submitNewWashroom}></SubmitWashroom>}></Route>
                 </Routes>
             </UserInfoContext.Provider>

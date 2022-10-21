@@ -13,7 +13,7 @@ const useLocalStorage = () => {
         const completeUserInfo = {
             username: username,
             token: token,
-            submissions: userSubmissions.washrooms ? userSubmissions : []
+            submissions: userSubmissions ? userSubmissions : []
         }
         window.localStorage.setItem('userInfo', JSON.stringify(completeUserInfo))
         setUserInfo(completeUserInfo)

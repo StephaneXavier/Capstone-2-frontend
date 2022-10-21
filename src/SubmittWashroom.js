@@ -11,7 +11,15 @@ const SubmitWashroom = ({ submitNewWashroom }) => {
     const handleChange = (e) => {
         const { name, value } = e.target
         setwashroomInfo({ ...washroomInfo, [name]: value })
-       
+
+    }
+
+    const onGeoLocate = (e) => {
+        e.preventDefault();
+        let userLocation = (location) => {
+            setwashroomInfo({ ...washroomInfo, xCoordinate: location.coords.longitude, yCoordinate: location.coords.latitude })
+        }
+        window.navigator.geolocation.getCurrentPosition(userLocation)
     }
 
     function handleSubmit(e) {
@@ -59,6 +67,7 @@ const SubmitWashroom = ({ submitNewWashroom }) => {
                     placeholder="yCoordinate"
                     type="yCoordinate"
                 />
+                <Button onClick={onGeoLocate}>Prefill my location</Button>
             </FormGroup>
 
             <FormGroup >

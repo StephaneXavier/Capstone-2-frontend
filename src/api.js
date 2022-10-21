@@ -56,7 +56,8 @@ class WashroomApi {
                     authorization: token
                 }
             })
-            return result.data
+            
+            return result.data.washrooms
 
         } catch (e) {
 
