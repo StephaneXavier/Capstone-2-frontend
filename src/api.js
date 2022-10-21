@@ -84,6 +84,15 @@ class WashroomApi {
         }
     }
 
+    static async getClosestWashroom(longitude, latitude){
+        try{
+            const washroom = await axios.get(DB_URL +'/washroom/getClosest', {params: {longitude, latitude}})
+            return washroom.data.shortestBathroomId
+        }catch(e){
+            console.log(e)
+        }
+    }
+
 
     // END OF CLASS
 }

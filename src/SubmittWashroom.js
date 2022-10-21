@@ -3,7 +3,7 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { redirect } from 'react-router-dom';
 
 const SubmitWashroom = ({ submitNewWashroom }) => {
-    const initialState = { washroomType: '', xCoordinate: '', yCoordinate: '', opensAt: '', closesAt: '' }
+    const initialState = { washroomType: '', longitude: '', latitude: '', opensAt: '', closesAt: '' }
     const [washroomInfo, setwashroomInfo] = useState(initialState);
 
 
@@ -17,7 +17,7 @@ const SubmitWashroom = ({ submitNewWashroom }) => {
     const onGeoLocate = (e) => {
         e.preventDefault();
         let userLocation = (location) => {
-            setwashroomInfo({ ...washroomInfo, xCoordinate: location.coords.longitude, yCoordinate: location.coords.latitude })
+            setwashroomInfo({ ...washroomInfo, longitude: location.coords.longitude, latitude: location.coords.latitude })
         }
         window.navigator.geolocation.getCurrentPosition(userLocation)
     }
@@ -26,6 +26,7 @@ const SubmitWashroom = ({ submitNewWashroom }) => {
         e.preventDefault();
         submitNewWashroom(washroomInfo);
         setwashroomInfo(initialState);
+        console.log('current submittedWashroom data is', washroomInfo)
         redirect('/')
     }
 
@@ -44,28 +45,28 @@ const SubmitWashroom = ({ submitNewWashroom }) => {
                 />
             </FormGroup>
             <FormGroup >
-                <Label for="xCoordinate"></Label>
+                <Label for="longitude"></Label>
                 <Input
 
-                    value={washroomInfo.xCoordinate}
+                    value={washroomInfo.longitude}
                     onChange={handleChange}
-                    id="xCoordinate"
-                    name="xCoordinate"
-                    placeholder="xoordinate"
-                    type="xCoordinate"
+                    id="longitude"
+                    name="longitude"
+                    placeholder="longitude"
+                    type="longitude"
                 />
             </FormGroup>
 
             <FormGroup >
-                <Label for="yCoordinate"></Label>
+                <Label for="latitude"></Label>
                 <Input
 
-                    value={washroomInfo.yCoordinate}
+                    value={washroomInfo.latitude}
                     onChange={handleChange}
-                    id="yCoordinate"
-                    name="yCoordinate"
-                    placeholder="yCoordinate"
-                    type="yCoordinate"
+                    id="latitude"
+                    name="latitude"
+                    placeholder="latitude"
+                    type="latitude"
                 />
                 <Button onClick={onGeoLocate}>Prefill my location</Button>
             </FormGroup>

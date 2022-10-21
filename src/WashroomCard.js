@@ -4,7 +4,7 @@ import { Card, CardBody, CardSubtitle, CardText, CardTitle, Button } from 'react
 
 const WashroomCard = ({ washroomInfo }) => {
 
-    const { washroom_type, x_coordinate, y_coordinate, opens_at, closes_at } = washroomInfo
+    const { washroom_type, longitude, latitude, opens_at, closes_at } = washroomInfo
     console.log('%%%%%%%%%%')
     console.log(washroomInfo)
     console.log(washroomInfo.x_coordinate)
@@ -36,7 +36,7 @@ const WashroomCard = ({ washroomInfo }) => {
                 }
 
                 <CardText>
-                    Location: {x_coordinate} ; {y_coordinate}
+                    Location: {longitude} ; {latitude}
                 </CardText>
                 <Button class='bg-danger'>
                     Delete
