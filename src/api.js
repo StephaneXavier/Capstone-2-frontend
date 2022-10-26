@@ -9,11 +9,26 @@ class WashroomApi {
 
     static async getAllCityApi() {
         try {
+            const day = new Intl.DateTimeFormat('en-US', {weekday:'long'}).format().toUpperCase()
+            const dateObj = new Date()
+            const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`
             const result = await axios.get(CITY_OF_OTTAWA_URL)
             const cityWashrooms = result.data.features
-            return cityWashrooms
+            const openDay = `HOURS_${day}_OPEN`
+            const closedDay = `HOURS_${day}_CLOSED`
+            
+            const openCityWashrooms = []
+            // for every washroom in the returned list, check to see if it is currently open (day and hour)
+            for(let washroom of cityWashrooms){
+                if( (time >= washroom.attributes[openDay]) && (time <= washroom.attributes[closedDay]) ){
+                    openCityWashrooms.push(washroom)
+                }
+            }
+
+
+            return openCityWashrooms
         } catch (e) {
-            console.log(`API error`, e.response)
+            console.log(`API error`, e)
         }
     }
 
@@ -93,6 +108,7 @@ class WashroomApi {
         }
     }
 
+    
 
     // END OF CLASS
 }

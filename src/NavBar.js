@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { Navbar, NavItem, Nav } from 'reactstrap';
 import { NavLink, Link } from 'react-router-dom';
 import './NavBar.css';
-import { UserInfoContext} from './App';
+import { UserInfoContext } from './App';
 
 
 const NavBar = () => {
     let userInfo = useContext(UserInfoContext)
-    
+
     return (
         <div className='NavBar'>
             <Navbar expand="md">
@@ -18,9 +18,6 @@ const NavBar = () => {
 
                 {userInfo.username ?
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink to="/washrooms" >Find a wahsroom</NavLink>
-                        </NavItem>
                         <NavItem>
                             <NavLink active to='/submit-washroom'>Submit washroom</NavLink>
                         </NavItem>

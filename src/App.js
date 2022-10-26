@@ -19,11 +19,12 @@ function App() {
 
     const [cityWashrooms, setCityWashrooms] = useState();
     const [userInfo, setUserInfo, clearUserInfo] = useLocalStorage();
-    
+
 
     useEffect(() => {
         async function getAllWashrooms() {
             const resultCityWashrooms = await WashroomApi.getAllCityApi()
+           
             setCityWashrooms(resultCityWashrooms)
         }
 
@@ -57,28 +58,6 @@ function App() {
         submitWahsroom()
     }
 
-    // function findClosestWashroom(userLocation){
-    //     const {longitude, latitude} = userLocation.coords
-    //     // console.log('longitude', longitude)
-    //     // console.log('latitude', latitude)
-        
-    //     let shortestBathroomId = {distance: Infinity};
-    //     for(let washroom of cityWashrooms){
-    //         let currentDistance = getDistance({latitude, longitude}, {latitude:washroom.geometry.y,longitude:washroom.geometry.x})
-    //         if(currentDistance < shortestBathroomId.distance){
-    //             shortestBathroomId = {...washroom, currentDistance}
-    //         }
-    //     }
-
-
-
-    //     console.log(shortestBathroomId)
-
-
-       
-    // }
-
-
     return (
         <BrowserRouter>
             <UserInfoContext.Provider value={userInfo} >
@@ -90,6 +69,7 @@ function App() {
                     <Route path="/logout" element={<Logout logout={clearUserInfo}></Logout>}></Route>
                     <Route path="/profile" element={<Profile></Profile>}></Route>
                     <Route path="/submit-washroom" element={<SubmitWashroom submitNewWashroom={submitNewWashroom}></SubmitWashroom>}></Route>
+                   
                 </Routes>
             </UserInfoContext.Provider>
         </BrowserRouter>
