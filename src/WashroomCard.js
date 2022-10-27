@@ -1,14 +1,15 @@
 import React from 'react';
 import { Card, CardBody, CardSubtitle, CardText, CardTitle, Button } from 'reactstrap';
 
+const GOOGLE_URL = 'https://www.google.com/maps/search/'
 
-const WashroomCard = ({ washroomInfo }) => {
+const WashroomCard = ({ washroomInfo, handleDeleteProfile }) => {
 
-    const { washroom_type, longitude, latitude, opens_at, closes_at } = washroomInfo
-    console.log('%%%%%%%%%%')
-    console.log(washroomInfo)
-    console.log(washroomInfo.x_coordinate)
-    console.log('%%%%%%%%%%')
+    const { id, washroom_type, longitude, latitude, opens_at, closes_at } = washroomInfo
+    
+    function handleDeleteCard(e){
+        handleDeleteProfile(id)
+    }
 
     return (
         <Card
@@ -36,9 +37,9 @@ const WashroomCard = ({ washroomInfo }) => {
                 }
 
                 <CardText>
-                    Location: {longitude} ; {latitude}
+                    <a href={GOOGLE_URL+latitude+' '+longitude}>Location</a>: {longitude} ; {latitude}
                 </CardText>
-                <Button class='bg-danger'>
+                <Button className='bg-danger' onClick={handleDeleteCard}>
                     Delete
                 </Button>
             </CardBody>

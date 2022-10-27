@@ -9,18 +9,18 @@ class WashroomApi {
 
     static async getAllCityApi() {
         try {
-            const day = new Intl.DateTimeFormat('en-US', {weekday:'long'}).format().toUpperCase()
+            const day = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format().toUpperCase()
             const dateObj = new Date()
             const time = `${dateObj.getHours()}:${dateObj.getMinutes()}`
             const result = await axios.get(CITY_OF_OTTAWA_URL)
             const cityWashrooms = result.data.features
             const openDay = `HOURS_${day}_OPEN`
             const closedDay = `HOURS_${day}_CLOSED`
-            
+
             const openCityWashrooms = []
             // for every washroom in the returned list, check to see if it is currently open (day and hour)
-            for(let washroom of cityWashrooms){
-                if( (time >= washroom.attributes[openDay]) && (time <= washroom.attributes[closedDay]) ){
+            for (let washroom of cityWashrooms) {
+                if ((time >= washroom.attributes[openDay]) && (time <= washroom.attributes[closedDay])) {
                     openCityWashrooms.push(washroom)
                 }
             }
@@ -71,7 +71,7 @@ class WashroomApi {
                     authorization: token
                 }
             })
-            
+
             return result.data.washrooms
 
         } catch (e) {
@@ -79,36 +79,51 @@ class WashroomApi {
         }
     }
 
-    static async registerNewUser(username, password){
-        try{
-            const token = await axios.post(DB_URL + '/auth/register', {username, password})
+    static async registerNewUser(username, password) {
+        try {
+            const token = await axios.post(DB_URL + '/auth/register', { username, password })
             return token.data.token
-                                     
-        }catch(e){
+
+        } catch (e) {
             console.log(e)
         }
     }
 
-    static async submitNewWashroom(washroomInfo, userInfo){
-        try{
-            const {username, token} = userInfo
-            const newWashroom = await axios.post(DB_URL+'/washroom', {washroomInfo, username, _token: token})
+    static async submitNewWashroom(washroomInfo, userInfo) {
+        try {
+            const { username, token } = userInfo
+            const newWashroom = await axios.post(DB_URL + '/washroom', { washroomInfo, username, _token: token })
             return newWashroom.data
-        }catch(e){
+        } catch (e) {
 
         }
     }
 
-    static async getClosestWashroom(longitude, latitude){
-        try{
-            const washroom = await axios.get(DB_URL +'/washroom/getClosest', {params: {longitude, latitude}})
+    static async getClosestWashroom(longitude, latitude) {
+        try {
+            const washroom = await axios.get(DB_URL + '/washroom/getClosest', { params: { longitude, latitude } })
             return washroom.data.shortestBathroomId
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
     }
 
-    
+    static async deleteWashroom(id, token) {
+        try {
+            await axios.delete(DB_URL + `/washroom/${id}`, {
+                headers: {
+                    authorization: token
+                }
+            
+            })
+            return true
+        }catch(e){
+            console.log(e)
+            
+        }
+    }
+
+
 
     // END OF CLASS
 }

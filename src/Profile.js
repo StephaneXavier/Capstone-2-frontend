@@ -2,20 +2,22 @@ import React from "react";
 import { UserInfoContext } from "./App";
 import { useContext } from "react";
 import WashroomCard from "./WashroomCard";
+import WashroomApi from "./api";
 
-const Profile = () => {
+const Profile = ({onDelete}) => {
 
     let userInfo = useContext(UserInfoContext)
-    console.log('***************')
-    console.log(userInfo.submissions)
-    console.log(userInfo.submissions[0].id)
-    console.log('***************')
+    
 
+    function handleDeleteProfile(id){
+        onDelete(id)
+    }
+    
     return (
 
         <div>
 
-        {userInfo.submissions.map(e => <WashroomCard washroomInfo = {e} ></WashroomCard>)}
+        {userInfo.submissions.map(e => <WashroomCard key={e.id} washroomInfo = {e} handleDeleteProfile={handleDeleteProfile} ></WashroomCard>)}
 
         </div>
 

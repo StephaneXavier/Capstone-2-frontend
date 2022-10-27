@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,  } from "react";
 import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
-import { getDistance } from 'geolib';
 import WashroomApi from "./api";
-import WashroomCard from "./WashroomCard";
 import { findClosestCityWashroom, userDeniesLocation, compareCityAndDBWashrooms } from './helpers'
 
 const GOOGLE_URL = 'https://www.google.com/maps/search/'
@@ -15,7 +12,6 @@ const Home = ({ cityWashrooms }) => {
 
 
     function userSharesLocation(position) {
-
         const { longitude, latitude } = position.coords
         async function findNearestWashroom() {
             const nearestCityWashroom = findClosestCityWashroom(longitude, latitude, cityWashrooms);
@@ -39,6 +35,9 @@ const Home = ({ cityWashrooms }) => {
         window.navigator.geolocation.getCurrentPosition(userSharesLocation, userDeniesLocation, options)
     }
 
+    function resetLocation(){
+        setNearestWashroom(null)
+    }
 
     return (
         <div>
@@ -49,7 +48,8 @@ const Home = ({ cityWashrooms }) => {
                     {
                         nearestWashroom ?
                             <>
-                                <a href={`${GOOGLE_URL + nearestWashroom.latitude + ' ' + nearestWashroom.longitude}`} > Nearest Washroom </a>
+                                <a href={`${GOOGLE_URL + nearestWashroom.latitude + ' ' + nearestWashroom.longitude}`} > Nearest Washroom </a> <br></br>
+                                <Button onClick={resetLocation}> reset location </Button>
                             </>
 
 

@@ -24,10 +24,15 @@ const SubmitWashroom = ({ submitNewWashroom }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        submitNewWashroom(washroomInfo);
-        setwashroomInfo(initialState);
-        console.log('current submittedWashroom data is', washroomInfo)
-        redirect('/')
+        if (!washroomInfo.washroomType || !washroomInfo.longitude || !washroomInfo.latitude) {
+            alert('must provide coordinates and name for washroom')
+        } else {
+            submitNewWashroom(washroomInfo);
+            setwashroomInfo(initialState);
+            console.log('current submittedWashroom data is', washroomInfo)
+            redirect('/')
+        }
+
     }
 
     return (

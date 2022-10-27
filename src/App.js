@@ -1,4 +1,4 @@
-import './App.css';
+
 import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar';
@@ -24,7 +24,7 @@ function App() {
     useEffect(() => {
         async function getAllWashrooms() {
             const resultCityWashrooms = await WashroomApi.getAllCityApi()
-           
+
             setCityWashrooms(resultCityWashrooms)
         }
 
@@ -58,6 +58,15 @@ function App() {
         submitWahsroom()
     }
 
+    function onDelete(id) {
+        const { username, token } = userInfo
+        async function carryOutDeletion() {
+            await WashroomApi.deleteWashroom(id, userInfo.token)
+            setUserInfo(username, token)
+        }
+        carryOutDeletion()
+    }
+
     return (
         <BrowserRouter>
             <UserInfoContext.Provider value={userInfo} >
@@ -67,9 +76,9 @@ function App() {
                     <Route path="/login" element={<Login loginUser={loginUser} ></Login>} ></Route>
                     <Route path="/register" element={<Register registerUser={registerUser}></Register>}></Route>
                     <Route path="/logout" element={<Logout logout={clearUserInfo}></Logout>}></Route>
-                    <Route path="/profile" element={<Profile></Profile>}></Route>
+                    <Route path="/profile" element={<Profile onDelete={onDelete}></Profile>}></Route>
                     <Route path="/submit-washroom" element={<SubmitWashroom submitNewWashroom={submitNewWashroom}></SubmitWashroom>}></Route>
-                   
+
                 </Routes>
             </UserInfoContext.Provider>
         </BrowserRouter>
