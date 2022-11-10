@@ -1,7 +1,11 @@
 import React from "react";
 import Home from "./Home";
-import { fireEvent, render } from "@testing-library/react";
+
+import { fireEvent, getByText, render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom'
+
+
+
 
 test('it renders without crashing', () => {
     render(<Home/>)
@@ -22,6 +26,11 @@ it('should show fetching data when page first loads',() => {
     expect(queryByText("fetching data...")).toBeInTheDocument()
 })
 
-it('should show the find a washroom button once API data is done loading', () => {
+it('testing screen', () => {
+    const {queryByText} = render(<Home cityWashrooms={[{washroomType : 'washroom1', geometry:{x:45.555, y:75.555}}]}/>);
+    const findWashroom = queryByText('Find a washroom!')
+
+    expect(screen.getByText('Find a washroom!')).toBeInTheDocument()
+    
     
 })

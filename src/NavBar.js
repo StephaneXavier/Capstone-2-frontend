@@ -19,7 +19,7 @@ const NavBar = () => {
                 {userInfo.username ?
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink active to='/submit-washroom'>Submit washroom</NavLink>
+                            <NavLink  to='/submit-washroom'>Submit washroom</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink to="/profile">Profile </NavLink>
@@ -31,10 +31,10 @@ const NavBar = () => {
                     :
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink active to='/login'>Login</NavLink>
+                            <NavLink  to='/login'>Login</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink active to='/register'>Register</NavLink>
+                            <NavLink  to='/register'>Register</NavLink>
                         </NavItem>
                     </Nav>
                 }

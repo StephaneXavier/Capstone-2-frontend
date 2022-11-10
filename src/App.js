@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar';
@@ -24,7 +23,6 @@ function App() {
     useEffect(() => {
         async function getAllWashrooms() {
             const resultCityWashrooms = await WashroomApi.getAllCityApi()
-
             setCityWashrooms(resultCityWashrooms)
         }
 

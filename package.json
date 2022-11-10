@@ -48,6 +48,9 @@
         "jest-environment-jsdom": "^29.2.2"
     },
     "jest": {
-        "testEnvironment": "jsdom"
+        "testEnvironment": "jsdom",
+        "moduleNameMapper":{
+            "\\.(css|less|sass|scss)$": "<rootDir>/config/CSStub.js"
+       }
     }
 }

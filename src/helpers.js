@@ -29,7 +29,6 @@ function userDeniesLocation(err) {
 
 
 function compareCityAndDBWashrooms(userLocation,DBWashroom, cityWashroom){
-    
     const {longitude, latitude} = userLocation
     const DBWashroomDistance = getDistance({latitude, longitude}, {latitude: DBWashroom.latitude, longitude: DBWashroom.longitude})
     const cityWashroomDistance = getDistance({latitude, longitude}, {latitude: cityWashroom.geometry.y, longitude: cityWashroom.geometry.x})
