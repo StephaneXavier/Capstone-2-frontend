@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+console.log()
 const DB_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 const CITY_OF_OTTAWA_URL = "https://maps.ottawa.ca/arcgis/rest/services/PublicWashrooms/MapServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
@@ -34,7 +35,7 @@ class WashroomApi {
 
     static async getAllDBWashrooms() {
         try {
-            const result = await axios.get(DB_URL + '/washroom')
+            const result = await axios.get(DB_URL + 'washroom')
             return result.data.washrooms
         } catch (e) {
             console.log(e)
@@ -47,7 +48,7 @@ class WashroomApi {
         try {
             const { username, password } = userLoginInfo
             const options = {
-                url: DB_URL + '/auth/login',
+                url: DB_URL + 'auth/login',
                 method: 'POST',
                 data: {
                     username,
@@ -66,7 +67,7 @@ class WashroomApi {
     static async getUserSubmissions(username, token) {
         try {
 
-            const result = await axios.get(DB_URL + `/user/submission/${username}`, {
+            const result = await axios.get(DB_URL + `user/submission/${username}`, {
                 headers: {
                     authorization: token
                 }
@@ -81,7 +82,7 @@ class WashroomApi {
 
     static async registerNewUser(username, password) {
         try {
-            const token = await axios.post(DB_URL + '/auth/register', { username, password })
+            const token = await axios.post(DB_URL + 'auth/register', { username, password })
             return token.data.token
 
         } catch (e) {
@@ -92,7 +93,7 @@ class WashroomApi {
     static async submitNewWashroom(washroomInfo, userInfo) {
         try {
             const { username, token } = userInfo
-            const newWashroom = await axios.post(DB_URL + '/washroom', { washroomInfo, username, _token: token })
+            const newWashroom = await axios.post(DB_URL + 'washroom', { washroomInfo, username, _token: token })
             return newWashroom.data
         } catch (e) {
 
@@ -101,7 +102,7 @@ class WashroomApi {
 
     static async getClosestWashroom(longitude, latitude) {
         try {
-            const washroom = await axios.get(DB_URL + '/washroom/getClosest', { params: { longitude, latitude } })
+            const washroom = await axios.get(DB_URL + 'washroom/getClosest', { params: { longitude, latitude } })
             return washroom.data.shortestBathroomId
         } catch (e) {
             console.log(e)
@@ -110,7 +111,7 @@ class WashroomApi {
 
     static async deleteWashroom(id, token) {
         try {
-            await axios.delete(DB_URL + `/washroom/${id}`, {
+            await axios.delete(DB_URL + `washroom/${id}`, {
                 headers: {
                     authorization: token
                 }
