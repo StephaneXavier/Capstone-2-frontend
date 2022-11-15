@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-console.log()
+
 const DB_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 const CITY_OF_OTTAWA_URL = "https://maps.ottawa.ca/arcgis/rest/services/PublicWashrooms/MapServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
@@ -102,6 +102,7 @@ class WashroomApi {
 
     static async getClosestWashroom(longitude, latitude) {
         try {
+            console.log('DB_URL is', DB_URL)
             const washroom = await axios.get(DB_URL + 'washroom/getClosest', { params: { longitude, latitude } })
             return washroom.data.shortestBathroomId
         } catch (e) {
