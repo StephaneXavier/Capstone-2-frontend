@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+require("dotenv").config();
 
 const DB_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -102,7 +102,6 @@ class WashroomApi {
 
     static async getClosestWashroom(longitude, latitude) {
         try {
-            console.log('DB_URL is', DB_URL)
             const washroom = await axios.get(DB_URL + 'washroom/getClosest', { params: { longitude, latitude } })
             return washroom.data.shortestBathroomId
         } catch (e) {
