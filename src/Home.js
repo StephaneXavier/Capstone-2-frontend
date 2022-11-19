@@ -12,18 +12,13 @@ const Home = ({ cityWashrooms }) => {
     const [toggle, setToggle] = useState(false)
 
 
-    useEffect( () => {
-        console.log(toggle)
-    }, [toggle])
-
-
-    function userSharesLocation(position) {
+       function userSharesLocation(position) {
         const { longitude, latitude } = position.coords
         async function findNearestWashroom() {
 
             const nearestCityWashroom = findClosestCityWashroom(longitude, latitude, cityWashrooms);
             const nearestDBWashroom = await WashroomApi.getClosestWashroom(longitude, latitude);
-            console.log(nearestCityWashroom)
+            
 
             if(!toggle || !nearestCityWashroom){
                 setNearestWashroom({...nearestDBWashroom})
