@@ -1,4 +1,19 @@
-## Gotta Go
+# Gotta Go
+------------------------------------------
+Link to deployed site [gotta-go](https://gotta-go-full.herokuapp.com/) 
+
+Based off a users location, the site will serve up the user with the closest washroom (city of Ottawa public restroom or porta potty). An account is not required to use this function, however to submit a portta potty location a user must sign up.
+
+## Data
+This web application makes use of the city of Ottawa API for publicly availble restrooms. Furthermore, the website collects user submitted data for publicly availble washrooms not in the [city of Ottawa API](https://open.ottawa.ca/datasets/ottawa::public-washrooms/about).
+
+## Tech
+* Server built in Node.js with Express
+* UI built with React using react-router-dom and reactstrap
+* Database: PostgreSQL
+* backend and front end deployed on Heroku
+
+# 
 
 ## Available Scripts
 
