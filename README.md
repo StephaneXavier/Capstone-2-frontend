@@ -1,6 +1,7 @@
 # Gotta Go
 ------------------------------------------
 Link to deployed site [gotta-go](https://gotta-go-full.herokuapp.com/) 
+Backend code can be found [here](https://github.com/StephaneXavier/Capstone-2-backend)
 
 Based off a users location, the site will serve up the user with the closest washroom (city of Ottawa public restroom or porta potty). An account is not required to use this function, however to submit a portta potty location a user must sign up.
 
